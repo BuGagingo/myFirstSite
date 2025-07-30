@@ -1,16 +1,407 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Landing Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .header h1:hover {
+            transform: scale(1.05);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        /* Main Content Grid */
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            color: #4a5568;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Biography Cards */
+        .bio-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .bio-card h2 {
+            color: white;
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .bio-card p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .bio-content {
+            flex: 1;
+        }
+
+        .bio-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .project-card h2 {
+            color: white;
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .project-card p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .project-card .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .bio-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .bio-image {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .card h2 {
+                font-size: 1.5rem;
+            }
+
+            .header {
+                padding: 40px 0;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation for cards on load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+    </style>
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
-</body>
+    <div class="container">
+        <!-- Header Section with Name -->
+        <header class="header">
+            <h1>Виктор Кухтин</h1>
+            <p>Разраб и препод)))</p>
+        </header>
 
+        <!-- Main Content Grid -->
+        <main class="content">
+            <!-- Biography Section 1 -->
+            <section class="card bio-card">
+                <div class="bio-content">
+                    <h2>About Me</h2>
+                    <p>
+                        I'm a passionate full-stack developer with over 5 years of experience creating 
+                        digital solutions that make a difference. My journey in technology began with 
+                        a curiosity about how things work and has evolved into a career dedicated to 
+                        building innovative applications that solve real-world problems.
+                    </p>
+                    <p>
+                        When I'm not coding, you can find me exploring new technologies, contributing 
+                        to open-source projects, or enjoying outdoor activities that help me maintain 
+                        a healthy work-life balance.
+                    </p>
+                </div>
+                <img src="path/to/your/image.jpg" alt="Your Image" class="bio-image">
+            </section>
+
+            <!-- Biography Section 2 -->
+            <section class="card bio-card">
+                <div class="bio-content">
+                    <h2>My Expertise</h2>
+                    <p>
+                        I specialize in modern web technologies including React, Node.js, Python, and 
+                        cloud platforms. My approach combines technical excellence with user-centered 
+                        design, ensuring that every project not only functions flawlessly but also 
+                        provides an exceptional user experience.
+                    </p>
+                    <p>
+                        I believe in continuous learning and staying current with industry trends. 
+                        This philosophy has helped me adapt to the ever-evolving tech landscape and 
+                        deliver cutting-edge solutions to my clients and employers.
+                    </p>
+                </div>
+                <svg class="bio-image" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="100" cy="100" r="90" fill="url(#grad2)" opacity="0.3"/>
+                    <rect x="70" y="60" width="60" height="40" rx="5" fill="white" opacity="0.8"/>
+                    <rect x="75" y="65" width="15" height="3" fill="url(#grad2)"/>
+                    <rect x="75" y="70" width="25" height="3" fill="url(#grad2)"/>
+                    <rect x="75" y="75" width="20" height="3" fill="url(#grad2)"/>
+                    <rect x="75" y="80" width="30" height="3" fill="url(#grad2)"/>
+                    <rect x="75" y="85" width="18" height="3" fill="url(#grad2)"/>
+                    <rect x="75" y="90" width="22" height="3" fill="url(#grad2)"/>
+                    <circle cx="85" cy="130" r="15" fill="white" opacity="0.8"/>
+                    <circle cx="115" cy="130" r="15" fill="white" opacity="0.8"/>
+                    <path d="M 85 125 L 85 135 M 80 130 L 90 130" stroke="url(#grad2)" stroke-width="2"/>
+                    <path d="M 115 125 L 115 135 M 110 130 L 120 130" stroke="url(#grad2)" stroke-width="2"/>
+                </svg>
+            </section>
+
+            <!-- Project 1 -->
+            <section class="card project-card">
+                <h2>E-Commerce Platform</h2>
+                <p>
+                    Developed a comprehensive e-commerce solution with real-time inventory management, 
+                    secure payment processing, and advanced analytics. The platform increased client 
+                    sales by 40% and improved customer satisfaction ratings significantly.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Stripe API</span>
+                </div>
+            </section>
+
+            <!-- Project 2 -->
+            <section class="card project-card">
+                <h2>Task Management App</h2>
+                <p>
+                    Built a collaborative task management application with real-time updates, 
+                    team collaboration features, and intelligent project tracking. The app 
+                    streamlined workflow processes for teams of all sizes and improved 
+                    productivity by 35%.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">WebSocket</span>
+                </div>
+            </section>
+
+            <!-- Project 3 -->
+            <section class="card project-card">
+                <h2>Data Visualization Dashboard</h2>
+                <p>
+                    Created an interactive dashboard for financial data analysis with real-time 
+                    charts, customizable reports, and automated insights. The solution helped 
+                    businesses make data-driven decisions and reduced report generation time by 60%.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-tag">D3.js</span>
+                    <span class="tech-tag">Express.js</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">Chart.js</span>
+                </div>
+            </section>
+        </main>
+
+        <!-- Contact Section -->
+        <section class="contact">
+            <h2>Let's Connect</h2>
+            <div class="contact-links">
+                <a href="mailto:john.doe@email.com" class="contact-link" style="border-radius: 5px; padding: 8px 16px;">Email</a>
+                <a href="https://linkedin.com/in/johndoe" class="contact-link" style="border-radius: 5px; padding: 8px 16px;">LinkedIn</a>
+                <a href="https://github.com/johndoe" class="contact-link" style="border-radius: 5px; padding: 8px 16px;">GitHub</a>
+                <a href="https://twitter.com/johndoe" class="contact-link" style="border-radius: 5px; padding: 8px 16px;">Twitter</a>
+            </div>
+    </div>
+</body>
 </html>
